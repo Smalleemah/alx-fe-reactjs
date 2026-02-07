@@ -7,6 +7,8 @@ function UserProfile() {
         max-w-xs sm:max-w-xs md:max-w-sm
         mx-auto my-10 md:my-20
         rounded-lg shadow-lg
+        hover:shadow-xl
+        transition-shadow duration-300 ease-in-out
         text-center
       "
     >
@@ -20,17 +22,21 @@ function UserProfile() {
           rounded-full
           mx-auto
           mb-4
+          transform
+          hover:scale-110
+          transition-transform duration-300 ease-in-out
         "
       />
 
       {/* User Name */}
       <h1
         className="
-          sm:text-lg
-          md:text-xl
+          sm:text-lg md:text-xl
           text-blue-800
           font-semibold
           mb-2
+          hover:text-blue-500
+          transition-colors duration-300
         "
       >
         John Doe
@@ -39,8 +45,7 @@ function UserProfile() {
       {/* User Bio */}
       <p
         className="
-          sm:text-sm
-          md:text-base
+          sm:text-sm md:text-base
           text-gray-600
           leading-relaxed
         "
