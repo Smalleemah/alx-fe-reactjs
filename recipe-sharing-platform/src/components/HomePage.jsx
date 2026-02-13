@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import recipesData from "../data.json";
+import AddRecipeForm from "./AddRecipeForm";
 
 export default function HomePage() {
   const [recipes, setRecipes] = useState([]);
@@ -9,13 +10,21 @@ export default function HomePage() {
     setRecipes(recipesData);
   }, []);
 
+  const handleAddRecipe = (newRecipe) => {
+    setRecipes((prev) => [newRecipe, ...prev]);
+  };
+
   return (
     <div className="container mx-auto p-6">
       <h1 className="text-3xl font-bold text-center mb-6">
         Recipe Sharing Platform
       </h1>
 
-      <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+      {/* Add Recipe Form */}
+      <AddRecipeForm onAdd={handleAddRecipe} />
+
+      {/* Recipe Cards */}
+      <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-6">
         {recipes.map((recipe) => (
           <Link key={recipe.id} to={`/recipe/${recipe.id}`} className="block">
             <div className="bg-white rounded-lg shadow-md hover:shadow-xl hover:scale-105 transition duration-300 cursor-pointer">
