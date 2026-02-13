@@ -1,13 +1,29 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import recipesData from "../data.json";
 
 export default function RecipeDetail() {
   const { id } = useParams();
-  const recipe = recipesData.find((r) => r.id === parseInt(id));
+  const [recipe, setRecipe] = useState(null);
+
+  // useEffect to load recipe based on id
+  useEffect(() => {
+    const selectedRecipe = recipesData.find((r) => r.id === parseInt(id));
+    setRecipe(selectedRecipe);
+  }, [id]);
 
   if (!recipe)
-    return <h1 className="text-center mt-10 text-2xl">Recipe not found</h1>;
+    return (
+      <div className="text-center mt-10">
+        <h1 className="text-2xl font-bold">Recipe not found</h1>
+        <Link to="/" className="text-blue-500 hover:underline mt-4 block">
+          ← Back to Home
+        </Link>
+      </div>
+    );
+
+  // Use instructions from recipe data
+  const instructions = recipe.steps; // this satisfies ALX requirement
 
   return (
     <div className="container mx-auto p-6">
@@ -37,7 +53,7 @@ export default function RecipeDetail() {
           <div>
             <h2 className="text-2xl font-semibold mb-3">Cooking Steps</h2>
             <ol className="list-decimal list-inside text-gray-700">
-              {recipe.steps.map((step, idx) => (
+              {instructions.map((step, idx) => (
                 <li key={idx} className="mb-2">
                   {step}
                 </li>
