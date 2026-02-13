@@ -17,7 +17,7 @@ export default function HomePage() {
 
       <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         {recipes.map((recipe) => (
-          <Link key={recipe.id} to={`/recipe/${recipe.id}`}>
+          <Link key={recipe.id} to={`/recipe/${recipe.id}`} className="block">
             <div className="bg-white rounded-lg shadow-md hover:shadow-xl hover:scale-105 transition duration-300 cursor-pointer">
               <img
                 src={recipe.image}
