@@ -12,16 +12,15 @@ export default function AddRecipeForm({ onAdd }) {
   // Validation errors
   const [errors, setErrors] = useState({});
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
+  // ✅ ALX-required validate function
+  const validate = () => {
     const newErrors = {};
 
     if (!title.trim()) newErrors.title = "Title is required";
     if (!ingredients.trim()) newErrors.ingredients = "Ingredients are required";
     if (!steps.trim()) newErrors.steps = "Preparation steps are required";
 
-    // Check ingredients has at least 2 items (comma-separated)
+    // Ingredients must have at least 2 items
     const ingredientItems = ingredients
       .split(",")
       .map((i) => i.trim())
@@ -30,6 +29,13 @@ export default function AddRecipeForm({ onAdd }) {
       newErrors.ingredients =
         "Please enter at least 2 ingredients separated by commas";
 
+    return newErrors;
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const newErrors = validate(); // Call the validate function
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       return;
@@ -39,16 +45,19 @@ export default function AddRecipeForm({ onAdd }) {
     const newRecipe = {
       id: Date.now(),
       title,
-      summary: steps.slice(0, 50) + "...", // short summary
+      summary: steps.slice(0, 50) + "...",
       image: "https://via.placeholder.com/300",
-      ingredients: ingredientItems,
+      ingredients: ingredients
+        .split(",")
+        .map((i) => i.trim())
+        .filter(Boolean),
       steps: steps
         .split("\n")
         .map((s) => s.trim())
         .filter(Boolean),
     };
 
-    // Call parent callback to add recipe
+    // Add recipe to parent state
     if (onAdd) onAdd(newRecipe);
 
     // Reset form
@@ -57,7 +66,7 @@ export default function AddRecipeForm({ onAdd }) {
     setSteps("");
     setErrors({});
 
-    // Redirect to home page
+    // Redirect to home
     navigate("/");
   };
 
@@ -75,9 +84,7 @@ export default function AddRecipeForm({ onAdd }) {
             className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
             placeholder="Enter recipe title"
           />
-          {errors.title && (
-            <p className="text-red-500 text-sm mt-1">{errors.title}</p>
-          )}
+          {errors.title && <p className="text-red-500 text-sm mt-1">{errors.title}</p>}
         </div>
 
         {/* Ingredients */}
@@ -97,7 +104,7 @@ export default function AddRecipeForm({ onAdd }) {
           )}
         </div>
 
-        {/* Preparation Steps */}
+        {/* Steps */}
         <div>
           <label className="block mb-1 font-semibold">
             Preparation Steps (each step on new line)
@@ -106,24 +113,12 @@ export default function AddRecipeForm({ onAdd }) {
             value={steps}
             onChange={(e) => setSteps(e.target.value)}
             className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="Step 1: Preheat oven...\nStep 2: Mix ingredients..."
             rows={4}
+            placeholder={`Step 1: Preheat oven...
+Step 2: Mix ingredients...
+Step 3: Bake until golden`}
           />
-          {errors.steps && (
-            <p className="text-red-500 text-sm mt-1">{errors.steps}</p>
-          )}
+          {errors.steps && <p className="text-red-500 text-sm mt-1">{errors.steps}</p>}
         </div>
 
-        {/* Submit Button */}
-        <div className="text-center">
-          <button
-            type="submit"
-            className="bg-blue-500 hover:bg-blue-600 text-white font-semibold px-6 py-2 rounded transition"
-          >
-            Add Recipe
-          </button>
-        </div>
-      </form>
-    </div>
-  );
-}
+        {/
