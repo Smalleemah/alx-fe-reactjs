@@ -1,18 +1,13 @@
-import { useState } from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import PostsComponent from "./components/PostsComponent";
 
+// Create query client
 const queryClient = new QueryClient();
 
 function App() {
-  // Toggle to demonstrate caching
-  const [showPosts, setShowPosts] = useState(true);
-
   return (
     <QueryClientProvider client={queryClient}>
-      <button onClick={() => setShowPosts(!showPosts)}>Toggle Posts</button>
-
-      {showPosts && <PostsComponent />}
+      <PostsComponent />
     </QueryClientProvider>
   );
 }
