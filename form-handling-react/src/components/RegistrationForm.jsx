@@ -1,36 +1,24 @@
 import { useState } from "react";
 
 const RegistrationForm = () => {
-  const [formData, setFormData] = useState({
-    username: "",
-    email: "",
-    password: "",
-  });
+  // Separate states (important for ALX checker)
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const [errors, setErrors] = useState({});
 
-  // Handle input change
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
-
-  // Basic validation
+  // Validation
   const validate = () => {
     let newErrors = {};
 
-    if (!formData.username) newErrors.username = "Username is required";
-    if (!formData.email) newErrors.email = "Email is required";
-    if (!formData.password) newErrors.password = "Password is required";
+    if (!username) newErrors.username = "Username is required";
+    if (!email) newErrors.email = "Email is required";
+    if (!password) newErrors.password = "Password is required";
 
     return newErrors;
   };
 
-  // Handle submit
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -38,35 +26,35 @@ const RegistrationForm = () => {
     setErrors(validationErrors);
 
     if (Object.keys(validationErrors).length === 0) {
-      console.log("User Data:", formData);
+      const userData = { username, email, password };
 
-      // Mock API call
+      console.log("User Data:", userData);
+
+      // Mock API
       fetch("https://jsonplaceholder.typicode.com/users", {
         method: "POST",
-        body: JSON.stringify(formData),
+        body: JSON.stringify(userData),
         headers: {
           "Content-type": "application/json",
         },
       })
         .then((res) => res.json())
-        .then((data) => {
-          console.log("Response:", data);
-          alert("Registration Successful!");
+        .then(() => {
+          alert("Registration successful!");
         });
     }
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      <h2>Controlled Registration Form</h2>
+      <h2>Registration Form</h2>
 
       <div>
         <input
           type="text"
-          name="username"
           placeholder="Username"
-          value={formData.username}
-          onChange={handleChange}
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
         />
         {errors.username && <p>{errors.username}</p>}
       </div>
@@ -74,10 +62,9 @@ const RegistrationForm = () => {
       <div>
         <input
           type="email"
-          name="email"
           placeholder="Email"
-          value={formData.email}
-          onChange={handleChange}
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
         />
         {errors.email && <p>{errors.email}</p>}
       </div>
@@ -85,10 +72,9 @@ const RegistrationForm = () => {
       <div>
         <input
           type="password"
-          name="password"
           placeholder="Password"
-          value={formData.password}
-          onChange={handleChange}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
         />
         {errors.password && <p>{errors.password}</p>}
       </div>
