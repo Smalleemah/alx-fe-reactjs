@@ -1,12 +1,18 @@
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { useState } from "react";
+import { QueryClient, QueryClientProvider } from "react-query";
 import PostsComponent from "./components/PostsComponent";
 
 const queryClient = new QueryClient();
 
 function App() {
+  // Toggle to demonstrate caching
+  const [showPosts, setShowPosts] = useState(true);
+
   return (
     <QueryClientProvider client={queryClient}>
-      <PostsComponent />
+      <button onClick={() => setShowPosts(!showPosts)}>Toggle Posts</button>
+
+      {showPosts && <PostsComponent />}
     </QueryClientProvider>
   );
 }
