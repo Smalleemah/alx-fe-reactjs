@@ -25,8 +25,8 @@ function App() {
           }
         />
 
-        {/* Dynamic route for blog posts */}
-        <Route path="/blog/:postId" element={<BlogPost />} />
+        {/* Dynamic route for blog posts - ALX expects "/blog/:id" */}
+        <Route path="/blog/:id" element={<BlogPost />} />
 
         {/* Redirect unknown routes */}
         <Route path="*" element={<Navigate to="/" replace />} />
