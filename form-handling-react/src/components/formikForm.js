@@ -2,7 +2,6 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
 const FormikForm = () => {
-  // Validation Schema
   const validationSchema = Yup.object({
     username: Yup.string().required("Username is required"),
     email: Yup.string()
@@ -22,9 +21,6 @@ const FormikForm = () => {
       }}
       validationSchema={validationSchema}
       onSubmit={(values, { resetForm }) => {
-        console.log("Formik Data:", values);
-
-        // Mock API
         fetch("https://jsonplaceholder.typicode.com/users", {
           method: "POST",
           body: JSON.stringify(values),
@@ -33,9 +29,8 @@ const FormikForm = () => {
           },
         })
           .then((res) => res.json())
-          .then((data) => {
-            console.log("Response:", data);
-            alert("Formik Registration Successful!");
+          .then(() => {
+            alert("Formik registration successful!");
             resetForm();
           });
       }}
