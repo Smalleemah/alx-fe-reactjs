@@ -1,10 +1,10 @@
-import Header from "./components/Header";
+import WelcomeMessage from "./components/WelcomeMessage";
 
 function App() {
   return (
-    <>
-      <Header />
-    </>
+    <div>
+      <WelcomeMessage />
+    </div>
   );
 }
 

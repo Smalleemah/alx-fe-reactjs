@@ -5,9 +5,7 @@ function SearchBar({ onSearch }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (query.trim()) {
-      onSearch(query);
-    }
+    if (query.trim()) onSearch(query);
   };
 
   return (
@@ -19,7 +17,10 @@ function SearchBar({ onSearch }) {
         onChange={(e) => setQuery(e.target.value)}
         style={{ padding: "10px", width: "70%" }}
       />
-      <button type="submit" style={{ padding: "10px 20px" }}>
+      <button
+        type="submit"
+        style={{ padding: "10px 20px", marginLeft: "10px" }}
+      >
         Search
       </button>
     </form>
