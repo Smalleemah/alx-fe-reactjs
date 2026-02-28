@@ -1,18 +1,15 @@
-import React from "react";
-
 function Footer() {
   return (
     <footer
       style={{
-        backgroundColor: "#004d40",
+        backgroundColor: "black",
         color: "white",
         textAlign: "center",
-        padding: "15px",
+        padding: "10px",
         marginTop: "20px",
-        fontFamily: "Arial, sans-serif",
       }}
     >
-      <p>&copy; 2026 My React App. All rights reserved.</p>
+      <p>© 2023 City Lovers</p>
     </footer>
   );
 }

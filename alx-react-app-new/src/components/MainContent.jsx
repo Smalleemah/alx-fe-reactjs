@@ -1,19 +1,13 @@
-import React from "react";
-
 function MainContent() {
   return (
     <main
       style={{
-        padding: "20px",
-        backgroundColor: "#e0f7fa",
-        fontFamily: "Tahoma, sans-serif",
         textAlign: "center",
+        padding: "20px",
+        fontSize: "18px",
       }}
     >
-      <p style={{ fontSize: "18px", color: "#006064" }}>
-        Welcome to the React app! Explore your favorite cities and user
-        profiles.
-      </p>
+      <p>I love to visit New York, Paris, and Tokyo.</p>
     </main>
   );
 }
