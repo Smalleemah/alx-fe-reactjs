@@ -4,19 +4,18 @@ import { useRecipeStore } from "./recipeStore";
 
 const RecipeList = () => {
   const recipes = useRecipeStore((state) => state.recipes);
-  const filteredRecipes = useRecipeStore((state) => state.filteredRecipes);
-  const searchTerm = useRecipeStore((state) => state.searchTerm);
-
-  const recipesToDisplay = searchTerm.length > 0 ? filteredRecipes : recipes;
+  const favorites = useRecipeStore((state) => state.favorites);
+  const addFavorite = useRecipeStore((state) => state.addFavorite);
+  const removeFavorite = useRecipeStore((state) => state.removeFavorite);
 
   return (
     <div style={{ padding: "20px" }}>
-      <h2 style={{ textAlign: "center" }}>Recipes</h2>
+      <h2 style={{ textAlign: "center" }}>All Recipes</h2>
 
-      {recipesToDisplay.length === 0 ? (
-        <p style={{ textAlign: "center" }}>No recipes found.</p>
+      {recipes.length === 0 ? (
+        <p>No recipes available.</p>
       ) : (
-        recipesToDisplay.map((recipe) => (
+        recipes.map((recipe) => (
           <div
             key={recipe.id}
             style={{
@@ -29,8 +28,24 @@ const RecipeList = () => {
             <h3>{recipe.title}</h3>
             <p>{recipe.description}</p>
 
-            {/* This satisfies ALX requirement */}
+            {/* View Details Link */}
             <Link to={`/recipe/${recipe.id}`}>View Details</Link>
+
+            <br />
+            <br />
+
+            {/* Favorite Button */}
+            <button
+              onClick={() =>
+                favorites.includes(recipe.id)
+                  ? removeFavorite(recipe.id)
+                  : addFavorite(recipe.id)
+              }
+            >
+              {favorites.includes(recipe.id)
+                ? "Remove from Favorites"
+                : "Add to Favorites"}
+            </button>
           </div>
         ))
       )}
