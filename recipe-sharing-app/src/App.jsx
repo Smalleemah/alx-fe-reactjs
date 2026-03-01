@@ -1,12 +1,14 @@
+import React from "react";
 import AddRecipeForm from "./components/AddRecipeForm";
 import RecipeList from "./components/RecipeList";
+import SearchBar from "./components/SearchBar";
 
 function App() {
   return (
     <div>
-      <h1 style={{ textAlign: "center", padding: "20px" }}>
-        Recipe Sharing App
-      </h1>
+      <h1 style={{ textAlign: "center" }}>Recipe Sharing App</h1>
+
+      <SearchBar />
       <AddRecipeForm />
       <RecipeList />
     </div>

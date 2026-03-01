@@ -1,16 +1,21 @@
+import React from "react";
 import { useRecipeStore } from "./recipeStore";
+
 const RecipeList = () => {
   const recipes = useRecipeStore((state) => state.recipes);
+  const filteredRecipes = useRecipeStore((state) => state.filteredRecipes);
+  const searchTerm = useRecipeStore((state) => state.searchTerm);
+
+  const recipesToDisplay = searchTerm.length > 0 ? filteredRecipes : recipes;
 
   return (
     <div style={{ padding: "20px" }}>
-      <h2 style={{ textAlign: "center" }}>Recipe List</h2>
-      {recipes.length === 0 ? (
-        <p style={{ textAlign: "center", fontStyle: "italic" }}>
-          No recipes yet!
-        </p>
+      <h2 style={{ textAlign: "center" }}>Recipes</h2>
+
+      {recipesToDisplay.length === 0 ? (
+        <p style={{ textAlign: "center" }}>No recipes found.</p>
       ) : (
-        recipes.map((recipe) => (
+        recipesToDisplay.map((recipe) => (
           <div
             key={recipe.id}
             style={{
@@ -18,11 +23,10 @@ const RecipeList = () => {
               padding: "10px",
               margin: "10px 0",
               borderRadius: "5px",
-              backgroundColor: "#f9f9f9",
             }}
           >
-            <h3 style={{ margin: "0 0 5px 0" }}>{recipe.title}</h3>
-            <p style={{ margin: 0 }}>{recipe.description}</p>
+            <h3>{recipe.title}</h3>
+            <p>{recipe.description}</p>
           </div>
         ))
       )}
