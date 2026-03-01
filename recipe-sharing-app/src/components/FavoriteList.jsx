@@ -4,7 +4,6 @@ import { useRecipeStore } from "./RecipeStore";
 const FavouritesList = () => {
   const recipes = useRecipeStore((state) => state.recipes);
   const favorites = useRecipeStore((state) => state.favorites);
-
   const favoriteRecipes = recipes.filter((r) => favorites.includes(r.id));
 
   return (

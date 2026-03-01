@@ -1,21 +1,16 @@
 import React from "react";
-import { useRecipeStore } from "./recipeStore";
+import { useRecipeStore } from "./RecipeStore";
 
 const SearchBar = () => {
   const setSearchTerm = useRecipeStore((state) => state.setSearchTerm);
 
   return (
-    <div style={{ textAlign: "center", margin: "20px" }}>
+    <div style={{ padding: "20px" }}>
       <input
         type="text"
         placeholder="Search recipes..."
         onChange={(e) => setSearchTerm(e.target.value)}
-        style={{
-          padding: "8px",
-          width: "300px",
-          borderRadius: "5px",
-          border: "1px solid gray",
-        }}
+        style={{ width: "100%", padding: "8px", marginBottom: "20px" }}
       />
     </div>
   );

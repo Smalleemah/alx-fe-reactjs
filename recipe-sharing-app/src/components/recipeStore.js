@@ -1,32 +1,33 @@
-import { create } from "zustand";
+import React from "react";
+import RecipeList from "./components/RecipeList";
+import FavouritesList from "./components/FavouritesList";
+import RecommendationList from "./components/RecommendationList";
+import AddRecipeForm from "./components/AddRecipeForm";
+import SearchBar from "./components/SearchBar";
+import HomePage from "./components/HomePage";
 
-export const useRecipeStore = create((set, get) => ({
-  recipes: [
-    { id: 1, title: "Spaghetti", description: "Tomato pasta" },
-    { id: 2, title: "Fried Rice", description: "Nigerian fried rice" },
-  ],
+function App() {
+  return (
+    <div>
+      {/* Optional Home Page */}
+      <HomePage />
 
-  favorites: [],
-  recommendations: [],
+      {/* Add Recipe Form */}
+      <AddRecipeForm />
 
-  addRecipe: (newRecipe) =>
-    set((state) => ({ recipes: [...state.recipes, newRecipe] })),
+      {/* Search Recipes */}
+      <SearchBar />
 
-  addFavorite: (recipeId) =>
-    set((state) => ({
-      favorites: [...state.favorites, recipeId],
-    })),
+      {/* All Recipes with Favorite button */}
+      <RecipeList />
 
-  removeFavorite: (recipeId) =>
-    set((state) => ({
-      favorites: state.favorites.filter((id) => id !== recipeId),
-    })),
+      {/* User Favorites */}
+      <FavouritesList />
 
-  generateRecommendations: () => {
-    const { recipes, favorites } = get();
-    const recommended = recipes.filter(
-      (recipe) => !favorites.includes(recipe.id) && Math.random() > 0.3,
-    );
-    set({ recommendations: recommended });
-  },
-}));
+      {/* Recommended Recipes */}
+      <RecommendationList />
+    </div>
+  );
+}
+
+export default App;
