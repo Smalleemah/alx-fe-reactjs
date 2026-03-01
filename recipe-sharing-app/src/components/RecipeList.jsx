@@ -1,6 +1,5 @@
-import { useRecipeStore } from "../stores/recipeStore";
+import { useRecipeStore } from "./recipeStore";
 const RecipeList = () => {
-  // Get recipes from Zustand store
   const recipes = useRecipeStore((state) => state.recipes);
 
   return (
