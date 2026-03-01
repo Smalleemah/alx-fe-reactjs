@@ -1,18 +1,4 @@
-import React from "react";
-import AddRecipeForm from "./components/AddRecipeForm";
-import RecipeList from "./components/RecipeList";
-import SearchBar from "./components/SearchBar";
-
+import { BrowserRouter as Router } from "react-router-dom";
 function App() {
-  return (
-    <div>
-      <h1 style={{ textAlign: "center" }}>Recipe Sharing App</h1>
-
-      <SearchBar />
-      <AddRecipeForm />
-      <RecipeList />
-    </div>
-  );
+  return <Router>{/* your components */}</Router>;
 }
-
-export default App;
