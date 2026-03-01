@@ -1,6 +1,5 @@
-import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
+import FavouritesList from "./components/FavouritesList";
+import RecommendationList from "./components/RecommendationList";
 import Navbar from "./components/Navbar";
 import RecipeList from "./components/RecipeList";
 import AddRecipeForm from "./components/AddRecipeForm";

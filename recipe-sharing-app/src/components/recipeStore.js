@@ -2,25 +2,15 @@ import { create } from "zustand";
 
 export const useRecipeStore = create((set, get) => ({
   recipes: [
-    {
-      id: 1,
-      title: "Spaghetti",
-      description: "Delicious pasta with tomato sauce",
-    },
-    {
-      id: 2,
-      title: "Fried Rice",
-      description: "Tasty Nigerian fried rice",
-    },
+    { id: 1, title: "Spaghetti", description: "Tomato pasta" },
+    { id: 2, title: "Fried Rice", description: "Nigerian fried rice" },
   ],
 
   favorites: [],
   recommendations: [],
 
   addRecipe: (newRecipe) =>
-    set((state) => ({
-      recipes: [...state.recipes, newRecipe],
-    })),
+    set((state) => ({ recipes: [...state.recipes, newRecipe] })),
 
   addFavorite: (recipeId) =>
     set((state) => ({
@@ -34,11 +24,9 @@ export const useRecipeStore = create((set, get) => ({
 
   generateRecommendations: () => {
     const { recipes, favorites } = get();
-
     const recommended = recipes.filter(
-      (recipe) => !favorites.includes(recipe.id) && Math.random() > 0.5,
+      (recipe) => !favorites.includes(recipe.id) && Math.random() > 0.3,
     );
-
     set({ recommendations: recommended });
   },
 }));
