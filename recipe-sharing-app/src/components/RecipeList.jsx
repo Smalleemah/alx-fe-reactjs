@@ -1,5 +1,4 @@
 import { useRecipeStore } from "../stores/recipeStore";
-
 const RecipeList = () => {
   // Get recipes from Zustand store
   const recipes = useRecipeStore((state) => state.recipes);
