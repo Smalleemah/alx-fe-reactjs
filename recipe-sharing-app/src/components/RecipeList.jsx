@@ -2,7 +2,6 @@ import React from "react";
 import { useRecipeStore } from "./RecipeStore";
 
 const RecipeList = () => {
-  // Get filtered recipes based on search term
   const recipes = useRecipeStore((state) => state.filteredRecipes());
   const favorites = useRecipeStore((state) => state.favorites);
   const addFavorite = useRecipeStore((state) => state.addFavorite);
@@ -11,7 +10,6 @@ const RecipeList = () => {
   return (
     <div style={{ padding: "20px" }}>
       <h2>All Recipes</h2>
-
       {recipes.length === 0 ? (
         <p>No recipes found.</p>
       ) : (
@@ -21,13 +19,12 @@ const RecipeList = () => {
             style={{
               border: "1px solid gray",
               padding: "10px",
-              marginBottom: "10px",
+              margin: "10px 0",
               borderRadius: "5px",
             }}
           >
             <h3>{recipe.title}</h3>
             <p>{recipe.description}</p>
-
             <button
               onClick={() =>
                 favorites.includes(recipe.id)

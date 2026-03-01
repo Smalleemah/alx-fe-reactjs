@@ -1,33 +1,36 @@
-import React from "react";
-import RecipeList from "./components/RecipeList";
-import FavouritesList from "./components/FavouritesList";
-import RecommendationList from "./components/RecommendationList";
-import AddRecipeForm from "./components/AddRecipeForm";
-import SearchBar from "./components/SearchBar";
-import HomePage from "./components/HomePage";
+import create from "zustand";
 
-function App() {
-  return (
-    <div>
-      {/* Optional Home Page */}
-      <HomePage />
+export const useRecipeStore = create((set, get) => ({
+  recipes: [],
+  favorites: [],
+  recommendations: [],
+  searchTerm: "",
 
-      {/* Add Recipe Form */}
-      <AddRecipeForm />
+  // Recipe actions
+  addRecipe: (recipe) =>
+    set((state) => ({ recipes: [...state.recipes, recipe] })),
+  setRecipes: (recipes) => set({ recipes }),
 
-      {/* Search Recipes */}
-      <SearchBar />
+  // Favorite actions
+  addFavorite: (id) =>
+    set((state) => ({ favorites: [...state.favorites, id] })),
+  removeFavorite: (id) =>
+    set((state) => ({
+      favorites: state.favorites.filter((favId) => favId !== id),
+    })),
 
-      {/* All Recipes with Favorite button */}
-      <RecipeList />
+  // Search actions
+  setSearchTerm: (term) => set({ searchTerm: term }),
+  filteredRecipes: () =>
+    get().recipes.filter((r) =>
+      r.title.toLowerCase().includes(get().searchTerm.toLowerCase()),
+    ),
 
-      {/* User Favorites */}
-      <FavouritesList />
-
-      {/* Recommended Recipes */}
-      <RecommendationList />
-    </div>
-  );
-}
-
-export default App;
+  // Recommendation (mock)
+  generateRecommendations: () =>
+    set((state) => ({
+      recommendations: state.recipes.filter(
+        (r) => state.favorites.includes(r.id) && Math.random() > 0.5,
+      ),
+    })),
+}));
