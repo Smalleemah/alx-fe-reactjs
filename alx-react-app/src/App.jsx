@@ -1,8 +1,10 @@
+import WelcomeMessage from "./components/WelcomeMessage";
+
 function App() {
   return (
     <div>
+      {/* Include the new component here */}
       <WelcomeMessage />
-      {/* Other components or content can go here */}
     </div>
   );
 }
