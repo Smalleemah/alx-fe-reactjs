@@ -1,32 +1,21 @@
 import { useState } from "react";
 
 function Counter() {
+  // Initialize state with 0
   const [count, setCount] = useState(0);
 
   return (
     <div style={{ textAlign: "center", marginTop: "20px" }}>
-      <p style={{ fontSize: "20px" }}>Current Count: {count}</p>
+      <p>Current Count: {count}</p>
 
-      <button
-        onClick={() => setCount(count + 1)}
-        style={{ margin: "5px", padding: "10px 15px" }}
-      >
-        Increment
-      </button>
+      {/* Button to increase the count */}
+      <button onClick={() => setCount(count + 1)}>Increment</button>
 
-      <button
-        onClick={() => setCount(count - 1)}
-        style={{ margin: "5px", padding: "10px 15px" }}
-      >
-        Decrement
-      </button>
+      {/* Button to decrease the count */}
+      <button onClick={() => setCount(count - 1)}>Decrement</button>
 
-      <button
-        onClick={() => setCount(0)}
-        style={{ margin: "5px", padding: "10px 15px" }}
-      >
-        Reset
-      </button>
+      {/* Button to set the count back to 0 */}
+      <button onClick={() => setCount(0)}>Reset</button>
     </div>
   );
 }
